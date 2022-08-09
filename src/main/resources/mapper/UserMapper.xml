@@ -37,4 +37,17 @@
         AND u.delete_time IS NULL
     </select>
 
+
+    <select id="selectPageByGroupIdtest" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT
+            <foreach collection="res"  item="re" separator=",">
+            ${re}
+            </foreach>
+        FROM lin_user AS u
+        WHERE u.id !=1
+          AND u.delete_time IS NULL
+    </select>
+
+
+
 </mapper>

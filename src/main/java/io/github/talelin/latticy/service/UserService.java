@@ -123,6 +123,16 @@ public interface UserService extends IService<UserDO> {
      */
     IPage<UserDO> getUserPageByGroupId(Page<UserDO> pager, Integer groupId);
 
+    /**
+     * 根据分组id分页获取用户数据
+     * 实现传入什么参数就返回什么字段的数据
+     *
+     * @param pager   分页
+     * @param groupId 分组id
+     * @return 数据页
+     */
+    IPage<UserDO> getUserPageByGroupIdtest(Page<UserDO> pager, Integer groupId,String[] res);
+
 
     /**
      * 获取超级管理员的id

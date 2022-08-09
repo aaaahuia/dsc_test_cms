@@ -2,16 +2,16 @@
 
 server:
   # 服务端口
-  port: 5000
+  port: 9010
 
 
 spring:
   # 数据源配置，请修改为你项目的实际配置
   datasource:
     username: "root"
-    password: "123456"
+    password: "12345678"
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lin-cms?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8
+    url: jdbc:mysql://localhost:3306/dsc_test_cms?useSSL=false&serverTimezone=UTC&characterEncoding=UTF8
 
 
 # 开启权限拦截

@@ -46,18 +46,67 @@ public class AdminController {
         return adminService.getAllStructuralPermissions();
     }
 
+
+
+
+
+
+    /*
+    返回用户列表的所有数据，
+    @参数 pagesize:表示每页返回数量
+    @参数 pageindex:表示返回第几页
+     */
     @AdminRequired
     @GetMapping("/users")
     @PermissionMeta(value = "查询所有用户", mount = false)
     public PageResponseVO<UserInfoVO> getUsers(
-            @Validated QueryUsersDTO dto) {
-        IPage<UserDO> iPage = adminService.getUserPageByGroupId(dto.getGroupId(), dto.getCount(), dto.getPage());
+            @Validated QueryUsersDTO dto,
+            @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize,
+            @RequestParam(value = "pageindex", required = false, defaultValue = "0") Integer pageindex
+    ) {
+
+        IPage<UserDO> iPage = adminService.getUserPageByGroupId(dto.getGroupId(), pagesize, pageindex);
+
         List<UserInfoVO> userInfos = iPage.getRecords().stream().map(user -> {
             List<GroupDO> groups = groupService.getUserGroupsByUserId(user.getId());
             return new UserInfoVO(user, groups);
         }).collect(Collectors.toList());
+
         return PageUtil.build(iPage, userInfos);
     }
+
+
+    /*
+    只返回用户名、邮箱的路由
+    @参数 pagesize:表示每页返回数量
+     */
+    @AdminRequired
+    @GetMapping("/users/test")
+    @PermissionMeta(value = "查询所有用户", mount = false)
+    public PageResponseVO<UserInfoVO> getUsers_test1(
+            @Validated QueryUsersDTO dto,
+            @RequestParam(value = "pagesize", required = false, defaultValue = "10") Integer pagesize,
+            @RequestParam(value = "pageindex", required = false, defaultValue = "0") Integer pageindex,
+            @RequestParam(value = "res", required = false)String[] res) {
+
+        IPage<UserDO> iPage = adminService.getUserPageByGroupId(dto.getGroupId(), pagesize, pageindex, res);
+
+        List<UserInfoVO> userInfos = iPage.getRecords().stream().map(user -> {
+            List<GroupDO> groups = groupService.getUserGroupsByUserId(user.getId());
+            return new UserInfoVO(user, groups);
+        }).collect(Collectors.toList());
+
+        return PageUtil.build(iPage, userInfos);
+    }
+
+
+
+
+
+
+
+
+
 
     @AdminRequired
     @PutMapping("/user/{id}/password")

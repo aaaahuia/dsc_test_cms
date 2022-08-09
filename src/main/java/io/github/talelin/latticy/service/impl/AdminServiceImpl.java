@@ -75,6 +75,24 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public IPage<UserDO> getUserPageByGroupId(Integer groupId, Integer count, Integer page, String[] res) {
+        Page<UserDO> pager = new Page<>(page, count);
+        IPage<UserDO> iPage;
+        // 如果group_id为空，则以分页的形式返回所有用户
+        if (groupId == null) {
+            //QueryWrapper<UserDO> wrapper = new QueryWrapper<>();
+            //Integer rootUserId = userService.getRootUserId();
+
+            //wrapper.lambda().select().ne(UserDO::getId, rootUserId);
+            iPage = userService.getUserPageByGroupIdtest(pager, 2, res);
+            //iPage = userService.page(pager, wrapper);
+        } else {
+            iPage = userService.getUserPageByGroupIdtest(pager, groupId,res);
+        }
+        return iPage;
+    }
+
+    @Override
     public boolean changeUserPassword(Integer id, ResetPasswordDTO dto) {
         throwUserNotExistById(id);
         return userIdentityService.changePassword(id, dto.getNewPassword());

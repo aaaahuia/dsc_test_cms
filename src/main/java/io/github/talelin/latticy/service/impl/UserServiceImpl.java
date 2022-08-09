@@ -210,6 +210,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         return this.baseMapper.selectPageByGroupId(pager, groupId, rootGroupId);
     }
 
+    /*
+    实现传入什么参数，就获取对应数据字段
+     */
+    @Override
+    public IPage<UserDO> getUserPageByGroupIdtest(Page<UserDO> pager, Integer groupId,String[] res) {
+        Integer rootGroupId = groupService.getParticularGroupIdByLevel(GroupLevelEnum.ROOT);
+        return this.baseMapper.selectPageByGroupIdtest(pager, groupId, rootGroupId, res);
+    }
+
     @Override
     public Integer getRootUserId() {
         Integer rootGroupId = groupService.getParticularGroupIdByLevel(GroupLevelEnum.ROOT);

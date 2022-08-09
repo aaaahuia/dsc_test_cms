@@ -44,6 +44,12 @@ public class UserInfoVO {
      */
     private String email;
 
+    private String phonenumber;
+    private String idcard;
+    private String address;
+    private String bankcard;
+    private String txz;
+
     /**
      * 分组
      */

@@ -40,4 +40,16 @@ public interface UserMapper extends BaseMapper<UserDO> {
      * @return 分页数据
      */
     IPage<UserDO> selectPageByGroupId(Page pager, Integer groupId, Integer rootGroupId);
+
+
+
+    /**
+     * 通过分组id分页获取用户数据，实现传入什么参数就能获取什么字段的数据
+     *
+     * @param pager   分页
+     * @param groupId 分组id
+     * @param rootGroupId 超级用户组id(不返回超级用户组的用户)
+     * @return 分页数据
+     */
+    IPage<UserDO> selectPageByGroupIdtest(Page pager, Integer groupId, Integer rootGroupId,String[] res);
 }

@@ -32,6 +32,8 @@ public interface AdminService {
      */
     IPage<UserDO> getUserPageByGroupId(Integer groupId, Integer count, Integer page);
 
+    IPage<UserDO> getUserPageByGroupId(Integer groupId, Integer count, Integer page, String[] res);
+
     /**
      * 修改用户密码（重置用户密码）
      *

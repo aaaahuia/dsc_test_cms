@@ -42,5 +42,10 @@ public class UserDO extends BaseModel implements Serializable {
      * 邮箱
      */
     private String email;
+    private String phonenumber;
+    private String idcard;
+    private String address;
+    private String bankcard;
+    private String txz;
 
 }

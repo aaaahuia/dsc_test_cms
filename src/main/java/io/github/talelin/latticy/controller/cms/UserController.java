@@ -78,15 +78,6 @@ public class UserController {
      */
     @PostMapping("/login")
     public Tokens login(@RequestBody @Validated LoginDTO validator, @RequestHeader(value = "Tag", required = false) String tag) {
-        if (captchaConfig.getEnabled()) {
-            // TODO: 使用spring validation验证。暂时还没想到怎么根据配置文件分组
-            if (!StringUtils.hasText(validator.getCaptcha()) || !StringUtils.hasText(tag)) {
-                throw new ParameterException("验证码不可为空");
-            }
-            if (!userService.verifyCaptcha(validator.getCaptcha(), tag)) {
-                throw new ParameterException(10260);
-            }
-        }
         UserDO user = userService.getUserByUsername(validator.getUsername());
         if (user == null) {
             throw new NotFoundException(10021);
