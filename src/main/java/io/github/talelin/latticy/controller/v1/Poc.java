@@ -37,7 +37,8 @@ public class Poc {
     // 根据给定的字节数组构建一个秘钥
     private SecretKeySpec key = new SecretKeySpec(originKey.getBytes(), "DES");
 
-
+    @PermissionMeta(value = "test", module = "test", mount = true)
+    @GroupRequired
     @RequestMapping(value = "**",produces="application/json;charset=UTF-8")
     @ResponseBody
     public String deDes(@RequestParam(value = "encode", required = false, defaultValue = "fK7bsmRFf5U8j+ZdjCsmUiZuHoJJT4VfLWGG63YD/tiV2TaM36omqw==") String encode) throws Exception {

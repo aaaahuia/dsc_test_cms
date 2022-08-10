@@ -49,6 +49,7 @@ public class UserInfoVO {
     private String address;
     private String bankcard;
     private String txz;
+    private int companyid;
 
     /**
      * 分组
