@@ -34,4 +34,5 @@ public class RegisterDTO {
 
     @NotBlank(message = "{password.confirm.not-blank}")
     private String confirmPassword;
+
 }

@@ -4,6 +4,7 @@ import io.github.talelin.latticy.dto.company.CreateOrUpdateCompanyDTO;
 import io.github.talelin.latticy.mapper.CompanyMapper;
 import io.github.talelin.latticy.model.BookDO;
 import io.github.talelin.latticy.model.CompanyDO;
+import io.github.talelin.latticy.model.UserDO;
 import io.github.talelin.latticy.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,11 @@ public class CompanyServiceImpl implements CompanyService {
     public List<CompanyDO> findAll(){
         List<CompanyDO> companys = companyMapper.selectList(null);
         return companys;
+    }
+
+    @Override
+    public List<UserDO> selectPersonList(Integer companyid) {
+        List<UserDO> userDOS = companyMapper.selectPersonList(companyid);
+        return userDOS;
     }
 }
