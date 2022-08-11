@@ -23,4 +23,22 @@ public class UpdateInfoDTO {
 
     @Length(max = 500, message = "{avatar.length}")
     private String avatar;
+
+    @Length(max = 50, message = "{idcard.length}")
+    private String idcard;
+
+    @Length(max = 24, message = "{phonenumber.length}")
+    private String phonenumber;
+
+    @Length(max = 500, message = "{address.length}")
+    private String address;
+
+    @Length(max = 50, message = "{bankcard.length}")
+    private String bankcard;
+
+    @Length(max = 50, message = "{txz.length}")
+    private String txz;
+
+    @Length(max = 1000, message = "{reamrks.length}")
+    private String remarks;
 }

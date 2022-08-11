@@ -128,6 +128,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         if (dto.getNickname() != null) {
             user.setNickname(dto.getNickname());
         }
+        if (dto.getIdcard() != null) {
+            user.setIdcard(dto.getIdcard());
+        }
+        if (dto.getPhonenumber() != null) {
+            user.setPhonenumber(dto.getPhonenumber());
+        }
+        if (dto.getAddress() != null) {
+            user.setAddress(dto.getAddress());
+        }
+        if (dto.getBankcard() != null) {
+            user.setBankcard(dto.getBankcard());
+        }
+        if (dto.getTxz() != null) {
+            user.setTxz(dto.getTxz());
+        }
+        if (dto.getRemarks() != null) {
+            user.setRemarks(dto.getRemarks());
+        }
 
         this.baseMapper.updateById(user);
         return user;
