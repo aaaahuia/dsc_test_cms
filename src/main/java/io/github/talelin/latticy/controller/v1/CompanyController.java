@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,12 +80,16 @@ public class CompanyController {
     @RequestMapping("/person/list")
     @GroupRequired
     @PermissionMeta(value = "查询公司员工", module = "公司管理员")
-    public List<UserDO> personSelect() {
+    public List<UserDO> personListSelect(@RequestParam(value = "companyid", required = false, defaultValue = "0") Integer company_id) {
         UserDO user = LocalUser.getLocalUser();
         Integer companyid = user.getCompanyid();
+        if(companyid == 0){
+            companyid = company_id;
+            if(companyid == 0){
+                throw  new NotFoundException("系统管理员请输入companyid参数已查询指定公司用户！",10270);
+            }
+        }
         List<UserDO> userDOS= companyService.selectPersonList(companyid);
         return userDOS;
-
-
     }
 }

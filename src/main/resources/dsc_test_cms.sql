@@ -87,14 +87,14 @@ CREATE TABLE IF NOT EXISTS `lin_group` (
   `delete_time` datetime(3) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_del` (`name`,`delete_time`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- 正在导出表  dsc_test_cms.lin_group 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `lin_group` DISABLE KEYS */;
 REPLACE INTO `lin_group` (`id`, `name`, `info`, `level`, `create_time`, `update_time`, `delete_time`) VALUES
 	(1, 'root', '超级用户组', 1, '2022-08-05 15:18:46.082', '2022-08-05 15:18:46.082', NULL),
-	(2, 'guest', '游客组', 3, '2022-08-05 15:18:46.106', '2022-08-10 17:11:05.738', NULL),
-	(3, 'companyadmin', '公司管理员', 2, '2022-08-10 17:11:02.652', '2022-08-10 17:11:10.278', NULL);
+	(2, 'companyadmin', '公司管理员', 2, '2022-08-10 17:11:02.652', '2022-08-11 10:36:26.347', NULL),
+	(3, 'guest', '游客组', 3, '2022-08-11 10:36:06.991', '2022-08-11 10:36:29.660', NULL);
 /*!40000 ALTER TABLE `lin_group` ENABLE KEYS */;
 
 -- 导出  表 dsc_test_cms.lin_group_permission 结构
@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `lin_group_permission` (
   KEY `group_id_permission_id` (`group_id`,`permission_id`) USING BTREE COMMENT '联合索引'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在导出表  dsc_test_cms.lin_group_permission 的数据：~0 rows (大约)
+-- 正在导出表  dsc_test_cms.lin_group_permission 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `lin_group_permission` DISABLE KEYS */;
 REPLACE INTO `lin_group_permission` (`id`, `group_id`, `permission_id`) VALUES
 	(1, 1, 5),
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `lin_permission` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在导出表  dsc_test_cms.lin_permission 的数据：~5 rows (大约)
+-- 正在导出表  dsc_test_cms.lin_permission 的数据：~6 rows (大约)
 /*!40000 ALTER TABLE `lin_permission` DISABLE KEYS */;
 REPLACE INTO `lin_permission` (`id`, `name`, `module`, `mount`, `create_time`, `update_time`, `delete_time`) VALUES
 	(1, '查询所有日志', '日志', 1, '2022-08-05 15:19:31.856', '2022-08-05 15:19:31.856', NULL),
@@ -172,20 +172,22 @@ CREATE TABLE IF NOT EXISTS `lin_user` (
   `address` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '家庭地址',
   `bankcard` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '银行卡号',
   `txz` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL COMMENT '港澳通行证',
-  `companyid` int(11) NOT NULL COMMENT '用户所属公司id',
+  `companyid` int(11) unsigned DEFAULT NULL COMMENT '用户所属公司id',
+  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_del` (`username`,`delete_time`),
-  UNIQUE KEY `email_del` (`email`,`delete_time`),
-  KEY `companyid` (`companyid`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `email_del` (`email`,`delete_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在导出表  dsc_test_cms.lin_user 的数据：~31 rows (大约)
+-- 正在导出表  dsc_test_cms.lin_user 的数据：~5 rows (大约)
 /*!40000 ALTER TABLE `lin_user` DISABLE KEYS */;
-REPLACE INTO `lin_user` (`id`, `username`, `nickname`, `avatar`, `email`, `create_time`, `update_time`, `delete_time`, `idcard`, `phonenumber`, `address`, `bankcard`, `txz`, `companyid`) VALUES
-	(1, 'root', 'root', NULL, 'root@123.com', '2022-08-05 15:18:46.014', '2022-08-10 16:02:11.167', NULL, '410723199908162995', '18345987649', '河南省新乡市卫滨区深信服小区88号楼一单元一楼', '379268200001022996', 'H64997812', 1),
-	(2, 'test', 'test', NULL, 'test@qq.com', '2022-08-08 09:19:46.594', '2022-08-10 16:43:49.984', NULL, '319183197201122919', '13549741364', '深圳市宝安区电信小区12号楼一单元', '6212261803005021968', 'W26498564', 2),
-	(3, 'test1', 'test1', NULL, 'test1@qq.com', '2022-08-10 15:33:00.000', '2022-08-10 16:44:05.802', NULL, '472139198801281235', '18313245965', '江苏省南京市秦淮区夫子庙', '6212261804006023956', 'H32698412', 1),
-	(4, 'test2', 'test2', NULL, 'test2@qq.com', '2022-08-10 16:45:52.000', '2022-08-10 16:45:53.000', NULL, '376527199804152669', '13698954785', '深圳市塘览东路47号', '6212261703005024865', 'W46984569', 2);
+REPLACE INTO `lin_user` (`id`, `username`, `nickname`, `avatar`, `email`, `create_time`, `update_time`, `delete_time`, `idcard`, `phonenumber`, `address`, `bankcard`, `txz`, `companyid`, `remarks`) VALUES
+	(1, 'root', 'root', NULL, 'root@123.com', '2022-08-05 15:18:46.014', '2022-08-11 10:31:46.704', NULL, '410723199908162995', '18345987649', '河南省新乡市卫滨区深信服小区88号楼一单元一楼', '379268200001022996', 'H64997812', NULL, '系统管理员'),
+	(2, 'test', 'test', NULL, 'test@qq.com', '2022-08-08 09:19:46.594', '2022-08-11 10:32:04.732', NULL, '319183197201122919', '13549741364', '深圳市宝安区电信小区12号楼一单元', '6212261803005021968', 'W26498564', 1, '1公司管理员'),
+	(3, 'test1', 'test1', NULL, 'test1@qq.com', '2022-08-10 15:33:00.000', '2022-08-11 10:32:13.074', NULL, '472139198801281235', '18313245965', '江苏省南京市秦淮区夫子庙', '6212261804006023956', 'H32698412', 1, '1公司普通员工'),
+	(4, 'test2', 'test2', NULL, 'test2@qq.com', '2022-08-10 16:45:52.000', '2022-08-11 10:34:49.996', NULL, '376527199804152669', '13698954785', '深圳市塘览东路47号', '6212261703005024865', 'W46984569', 1, '1公司普通员工'),
+	(5, 'test3', NULL, NULL, 'test3@qq.com', '2022-08-11 10:16:19.547', '2022-08-11 10:39:47.048', NULL, NULL, NULL, NULL, NULL, NULL, 2, '2公司管理员'),
+	(6, 'test4', NULL, NULL, 'test4@qq.com', '2022-08-11 10:34:20.000', '2022-08-11 10:39:53.264', NULL, NULL, NULL, NULL, NULL, NULL, 2, '2公司普通员工');
 /*!40000 ALTER TABLE `lin_user` ENABLE KEYS */;
 
 -- 导出  表 dsc_test_cms.lin_user_group 结构
@@ -195,17 +197,21 @@ CREATE TABLE IF NOT EXISTS `lin_user_group` (
   `group_id` int(10) unsigned NOT NULL COMMENT '分组id',
   PRIMARY KEY (`id`),
   KEY `user_id_group_id` (`user_id`,`group_id`) USING BTREE COMMENT '联合索引'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在导出表  dsc_test_cms.lin_user_group 的数据：~0 rows (大约)
+-- 正在导出表  dsc_test_cms.lin_user_group 的数据：~7 rows (大约)
 /*!40000 ALTER TABLE `lin_user_group` DISABLE KEYS */;
 REPLACE INTO `lin_user_group` (`id`, `user_id`, `group_id`) VALUES
 	(1, 1, 1),
-	(4, 1, 2),
+	(2, 1, 2),
 	(3, 1, 3),
-	(2, 2, 2),
+	(4, 2, 2),
 	(5, 2, 3),
-	(6, 43, 3);
+	(6, 3, 3),
+	(7, 4, 3),
+	(8, 5, 2),
+	(9, 5, 3),
+	(10, 6, 3);
 /*!40000 ALTER TABLE `lin_user_group` ENABLE KEYS */;
 
 -- 导出  表 dsc_test_cms.lin_user_identity 结构
@@ -219,13 +225,14 @@ CREATE TABLE IF NOT EXISTS `lin_user_identity` (
   `update_time` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
   `delete_time` datetime(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 正在导出表  dsc_test_cms.lin_user_identity 的数据：~0 rows (大约)
+-- 正在导出表  dsc_test_cms.lin_user_identity 的数据：~3 rows (大约)
 /*!40000 ALTER TABLE `lin_user_identity` DISABLE KEYS */;
 REPLACE INTO `lin_user_identity` (`id`, `user_id`, `identity_type`, `identifier`, `credential`, `create_time`, `update_time`, `delete_time`) VALUES
 	(1, 1, 'USERNAME_PASSWORD', 'root', 'pbkdf2sha256:64000:18:24:n:yUnDokcNRbwILZllmUOItIyo9MnI00QW:6ZcPf+sfzyoygOU8h/GSoirF', '2022-08-05 15:18:46.049', '2022-08-05 15:18:46.049', NULL),
-	(2, 2, 'USERNAME_PASSWORD', 'test', 'pbkdf2sha256:64000:18:24:n:xbtFDzIw8Yxh+c/kt5jeSH+jFgPO28t9:bpJl4PPDd52lR0x7NdJUMgMm', '2022-08-08 09:20:05.529', '2022-08-10 14:44:24.303', NULL);
+	(2, 2, 'USERNAME_PASSWORD', 'test', 'pbkdf2sha256:64000:18:24:n:xbtFDzIw8Yxh+c/kt5jeSH+jFgPO28t9:bpJl4PPDd52lR0x7NdJUMgMm', '2022-08-08 09:20:05.529', '2022-08-10 14:44:24.303', NULL),
+	(4, 5, 'USERNAME_PASSWORD', 'test3', 'pbkdf2sha256:64000:18:24:n:+vG3t/+sGbgfMFdzZIQWjGzivPv44fz6:wGezNpaz8/u8c4udfc2+/aOz', '2022-08-11 10:16:19.775', '2022-08-11 10:43:19.801', NULL);
 /*!40000 ALTER TABLE `lin_user_identity` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

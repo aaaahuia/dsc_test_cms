@@ -50,6 +50,7 @@ public class UserInfoVO {
     private String bankcard;
     private String txz;
     private int companyid;
+    private String remarks;
 
     /**
      * 分组

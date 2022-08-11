@@ -48,5 +48,6 @@ public class UserDO extends BaseModel implements Serializable {
     private String bankcard;
     private String txz;
     private int companyid;
+    private String remarks;
 
 }
