@@ -14,6 +14,7 @@ import io.github.talelin.latticy.model.UserDO;
 import io.github.talelin.latticy.service.AdminService;
 import io.github.talelin.latticy.service.GroupService;
 import io.github.talelin.latticy.vo.*;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/cms/admin")
 @PermissionModule(value = "管理员")
+@Api(value="ADMIN接口",tags="ADMIN")
 public class AdminController {
 
     @Autowired

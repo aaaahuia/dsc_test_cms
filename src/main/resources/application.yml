@@ -46,3 +46,6 @@ logging:
     rollingpolicy:
       max-history:
   config:
+#Swagger-ui.html
+mconfig:
+  swagger-ui-open: true

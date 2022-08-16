@@ -3,6 +3,7 @@ package io.github.talelin.latticy.controller.cms;
 import io.github.talelin.core.annotation.LoginRequired;
 import io.github.talelin.latticy.bo.FileBO;
 import io.github.talelin.latticy.service.FileService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/cms/file")
+@Api(value="FILE接口",tags="FILE")
 public class FileController {
 
     @Autowired

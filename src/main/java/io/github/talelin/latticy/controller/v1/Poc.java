@@ -9,6 +9,8 @@ import io.github.talelin.latticy.service.BookService;
 import io.github.talelin.latticy.vo.CreatedVO;
 import io.github.talelin.latticy.vo.DeletedVO;
 import io.github.talelin.latticy.vo.UpdatedVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/poc")
 @Validated
+@Api(value="POC接口",tags="POC")
 public class Poc {
 
     @Autowired
@@ -37,10 +40,9 @@ public class Poc {
     // 根据给定的字节数组构建一个秘钥
     private SecretKeySpec key = new SecretKeySpec(originKey.getBytes(), "DES");
 
-    @PermissionMeta(value = "test", module = "test", mount = true)
-    @GroupRequired
     @RequestMapping(value = "**",produces="application/json;charset=UTF-8")
     @ResponseBody
+    @ApiOperation(value="POC模块",httpMethod = "POST",notes = "发送加密DES加密的返回数据（encode参数）到该接口即可")
     public String deDes(@RequestParam(value = "encode", required = false, defaultValue = "fK7bsmRFf5U8j+ZdjCsmUiZuHoJJT4VfLWGG63YD/tiV2TaM36omqw==") String encode) throws Exception {
 
         Cipher cipher = this.getDes();
@@ -55,6 +57,7 @@ public class Poc {
     }
 
     @GetMapping("/endes")
+    @ApiOperation(value="加密数据模块",notes = "发送URL编码后的plainText参数到该路由即可返回加密后的数据")
     public String enDes(@RequestParam(value = "plainText", required = false, defaultValue = "请传入des加密的encode参数") String plainText) throws Exception {
 
         Cipher cipher = this.getDes();

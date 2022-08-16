@@ -10,6 +10,7 @@ import io.github.talelin.latticy.dto.query.BasePageDTO;
 import io.github.talelin.latticy.model.LogDO;
 import io.github.talelin.latticy.service.LogService;
 import io.github.talelin.latticy.vo.PageResponseVO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/cms/log")
 @PermissionModule(value = "日志")
 @Validated
+@Api(value="LOG接口",tags="LOG")
 public class LogController {
     @Autowired
     private LogService logService;

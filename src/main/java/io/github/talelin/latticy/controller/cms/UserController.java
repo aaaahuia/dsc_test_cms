@@ -24,6 +24,7 @@ import io.github.talelin.latticy.vo.LoginCaptchaVO;
 import io.github.talelin.latticy.vo.UpdatedVO;
 import io.github.talelin.latticy.vo.UserInfoVO;
 import io.github.talelin.latticy.vo.UserPermissionVO;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
@@ -46,6 +47,7 @@ import java.util.Map;
 @RequestMapping("/cms/user")
 @PermissionModule(value = "用户")
 @Validated
+@Api(value="USER接口",tags="USER")
 public class UserController {
 
     @Autowired

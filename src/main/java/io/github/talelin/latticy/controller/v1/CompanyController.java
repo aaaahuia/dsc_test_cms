@@ -16,6 +16,8 @@ import io.github.talelin.latticy.model.UserDO;
 import io.github.talelin.latticy.service.AdminService;
 import io.github.talelin.latticy.service.CompanyService;
 import io.github.talelin.latticy.vo.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/v1/company")
 @Validated
+@Api(value="公司接口",tags="公司")
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
@@ -80,6 +83,7 @@ public class CompanyController {
     @RequestMapping("/person/list")
     @GroupRequired
     @PermissionMeta(value = "查询公司员工", module = "公司管理员")
+    @ApiOperation(value="查询公司员工",httpMethod = "GET",notes = "管理员查询公司所有员工")
     public List<UserDO> personListSelect(@RequestParam(value = "companyid", required = false, defaultValue = "0") Integer company_id) {
         UserDO user = LocalUser.getLocalUser();
         Integer companyid = user.getCompanyid();
