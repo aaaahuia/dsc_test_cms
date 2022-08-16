@@ -152,6 +152,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>dsc_test_cms_v0.3</finalName>
     </build>
 
 

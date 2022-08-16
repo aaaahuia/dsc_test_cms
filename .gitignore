@@ -4,7 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 **/target/
-config/
+
 
 **.DS_Store
 
